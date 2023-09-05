@@ -18,13 +18,12 @@ export class SignupComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      
   }
 
   signupForm!: FormGroup;
   showErrors: boolean = false
 
   isPasswordMatch(): boolean {
-    return this.signupForm.get('cpassword') === this.signupForm.get('password');
+    return this.signupForm.get('cpassword')?.value === this.signupForm.get('password')?.value;
   }
 }
