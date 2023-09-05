@@ -1,0 +1,62 @@
+<div class="small-circle"></div>
+<div class="big-circle"></div>
+<div class="auth-picture"></div>
+
+<div class="user-form-hanger">
+    <div class="header">
+        <div class="form-title">WELCOME BACK</div>
+        <div class="form-title-explanation">sign in to your account</div>
+    </div>
+
+    <form [formGroup]="loginForm" class="form-group">
+        <div class="form-inputs">
+            <div class="input-block">
+                <div class="email-icon"></div>
+                <input #inputElement type="text" name="email" id="email" class="email"
+                  formControlName="email"
+                  [placeholder]="'email'"
+                 (input)="globalFunctions.detectErrors($event.target, loginForm.get('email')?.invalid)"
+                 (click)="globalFunctions.commitErrors($event.target, loginForm.get('email')?.invalid)"
+                (change)="globalFunctions.commitErrors($event.target, loginForm.get('email')?.invalid)">
+    
+                <div class="input-error" *ngIf="(loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)) || showErrors">
+                    <div *ngIf="loginForm.get('email')?.hasError('required')">This field is required.</div>
+                    <div *ngIf="loginForm.get('email')?.hasError('email')">email is not valid</div>
+                </div>
+            </div>
+    
+            <div class="input-block">
+                <div class="key-icon"></div>
+                <input type="password" name="password" id="password" class="password"
+                 formControlName="password"
+                 [placeholder]="'password'"
+                    (input)="globalFunctions.detectErrors($event.target, loginForm.get('password')?.invalid)"
+                    (click)="globalFunctions.commitErrors($event.target, loginForm.get('password')?.invalid)"
+                    (change)="globalFunctions.commitErrors($event.target, loginForm.get('password')?.invalid)">
+    
+                <div class="input-error" *ngIf="(loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)) || showErrors">
+                    <div *ngIf="loginForm.get('password')?.hasError('required')">This field is required.</div>
+                    <div *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long.</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-buttons">
+            <button class="login-btn" (click)="globalFunctions.rippleEffect($event)" type="submit">Log in</button>
+        </div>
+    </form>
+    <div class="other-options">
+        <div class="dividor">
+            <div class="dividor-title">Or log in with</div>
+        </div>
+
+        <div class="accounts">
+            <div class="meta" (click)="globalFunctions.rippleEffect($event)"></div>
+            <div class="google" (click)="globalFunctions.rippleEffect($event)"></div>
+        </div>
+
+        <div class="no-accounts">
+            <div class="no-accounts-text">You don’t have an account ? <a [routerLink]="'/signup'">sign up</a></div>
+        </div>
+    </div>
+</div>

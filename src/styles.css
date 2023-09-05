@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'Heebo';
+    src: url('assets/font/Heebo-VariableFont_wght.ttf') format('truetype');
+}
+
+:root{
+    --primary-color: #23A34A;
+    --secondary-color: #4A3594;
+}
+
+div,
+form{
+    display: flex;
+}
+
+*{
+    font-family: 'Heebo', 'Arial';
+    margin: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+button{
+    position: relative;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+app-login,
+app-signup{
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-inline: 105px;
+    overflow: hidden;
+}
+
+app-root{
+    max-width: 100%;
+}
+
+span{
+    position: absolute;
+    background: #ddd;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: animate 0.6s linear infinite;
+}
+
+.google span,
+.meta span{
+    z-index: -1;
+}
+
+@keyframes animate{
+    0%{
+        width: 0px;
+        height: 0px;
+        opacity: 0.7;
+    }
+
+    100%{
+        width: 370px;
+        height: 370px;
+        opacity: 0;
+    }
+}
+
+@media screen and (max-width: 1176px){
+    app-login,
+    app-signup{
+        padding-inline: 50px;
+        
+    }
+    
+}
+
+@media screen and (max-width: 1051px){
+    app-login,
+    app-signup{
+        justify-content: center;
+        padding: 0;
+    }
+    
+}
