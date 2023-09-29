@@ -27,13 +27,14 @@ html{
 
 button{
     position: relative;
+    overflow: hidden;
     border: none;
     cursor: pointer;
-    overflow: hidden;
 }
 
 app-login,
-app-signup{
+app-signup,
+app-user-info{
     position: relative;
     width: 100%;
     max-width: 100%;
@@ -57,9 +58,17 @@ span{
     animation: animate 0.6s linear infinite;
 }
 
+.type span{
+    background-color: #676565;
+}
+
 .google span,
 .meta span{
     z-index: -1;
+}
+
+.hidden{
+    display: none;
 }
 
 app-nav-visitor{
@@ -89,7 +98,8 @@ app-nav-visitor{
 
 @media screen and (max-width: 1176px){
     app-login,
-    app-signup{
+    app-signup,
+    app-user-info{
         padding-inline: 50px;
         
     }
@@ -98,7 +108,8 @@ app-nav-visitor{
 
 @media screen and (max-width: 1051px){
     app-login,
-    app-signup{
+    app-signup,
+    app-user-info{
         justify-content: center;
         padding: 0;
     }

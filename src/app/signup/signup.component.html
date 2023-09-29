@@ -1,6 +1,7 @@
 <div class="small-circle"></div>
 <div class="big-circle"></div>
 <div class="auth-picture"></div>
+<div class="auth-picture-fixed"></div>
 
 <div class="user-form-hanger">
     <div class="header">
@@ -10,71 +11,280 @@
 
     <form [formGroup]="signupForm" class="form-group">
         <div class="form-inputs">
-            <div class="input-block">
-                <div class="account-icon"></div>
-                <input #inputElement type="text" name="email" id="username" class="username"
-                  formControlName="username"
-                  [placeholder]="'username'"
-                 (input)="globalFunctions.detectErrors($event.target, signupForm.get('username')?.invalid)"
-                 (click)="globalFunctions.commitErrors($event.target, signupForm.get('username')?.invalid)"
-                (change)="globalFunctions.commitErrors($event.target, signupForm.get('username')?.invalid)">
+            <div class="page" [class.hidden] = "!inStepOne">
+                <div class="input-block">
+                    <div class="account-icon"></div>
+                    <input #inputElement type="text" name="email" id="username" class="username"
+                      formControlName="username"
+                      [placeholder]="'username'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('username')?.invalid && (signupForm.get('username')?.dirty || signupForm.get('username')?.touched)) || showErrorsStepOne">
+                        <div *ngIf="signupForm.get('username')?.hasError('required')">This field is required.</div>
+                        <div *ngIf="signupForm.get('username')?.hasError('minlength')">username is not valid</div>
+                    </div>
+                </div>
     
-                <div class="input-error" *ngIf="(signupForm.get('username')?.invalid && (signupForm.get('username')?.dirty || signupForm.get('username')?.touched)) || showErrors">
-                    <div *ngIf="signupForm.get('username')?.hasError('required')">This field is required.</div>
-                    <div *ngIf="signupForm.get('username')?.hasError('minlength')">username is not valid</div>
+                <div class="input-block">
+                    <div class="email-icon"></div>
+                    <input #inputElement type="text" name="email" id="email" class="email"
+                      formControlName="email"
+                      [placeholder]="'email'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)) || showErrorsStepOne">
+                        <div *ngIf="signupForm.get('email')?.hasError('required')">This field is required.</div>
+                        <div *ngIf="signupForm.get('email')?.hasError('email')">email is not valid</div>
+                    </div>
+                </div>
+        
+                <div class="input-block">
+                    <div class="key-icon"></div>
+                    <input type="password" name="password" id="password" class="password"
+                     formControlName="password"
+                     [placeholder]="'password'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)) || showErrorsStepOne">
+                        <div *ngIf="signupForm.get('password')?.hasError('required')">This field is required.</div>
+                        <div *ngIf="signupForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long.</div>
+                    </div>
+                </div>
+    
+                <div class="input-block">
+                    <div class="key-icon"></div>
+                    <input type="password" name="cpassword" id="cpassword" class="cpassword"
+                     formControlName="cpassword"
+                     [placeholder]="'confirm password'">
+        
+                    <div class="input-error" *ngIf="((signupForm.get('cpassword')?.invalid || !isPasswordMatch()) && (signupForm.get('cpassword')?.dirty || signupForm.get('cpassword')?.touched)) || showErrorsStepOne">
+                        <div *ngIf="signupForm.get('cpassword')?.hasError('required')">This field is required.</div>
+                        <div *ngIf="signupForm.get('cpassword')?.hasError('minlength')">Password confirmation must be at least 8 characters long.</div>
+                        <div *ngIf="!isPasswordMatch()">confirmation doesn't correspond to the password</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="page" [class.hidden] = "!inStepTwo">
+                <div class="user-type-block">
+                    <div class="type" (click)="globalFunctions.scaleEffect($event); setUserType(true)" [class.not-chosen] = "isStudent === false">Student</div>
+                    <div class="type" (click)="globalFunctions.scaleEffect($event); setUserType(false)" [class.not-chosen] = "isStudent === true">Company</div>
+                </div>
+
+                <div class="input-error" *ngIf="showErrorsStepTwo">
+                    <div *ngIf="isStudent == null">Please specify your identity</div>
                 </div>
             </div>
 
-            <div class="input-block">
-                <div class="email-icon"></div>
-                <input #inputElement type="text" name="email" id="email" class="email"
-                  formControlName="email"
-                  [placeholder]="'email'"
-                 (input)="globalFunctions.detectErrors($event.target, signupForm.get('email')?.invalid)"
-                 (click)="globalFunctions.commitErrors($event.target, signupForm.get('email')?.invalid)"
-                (change)="globalFunctions.commitErrors($event.target, signupForm.get('email')?.invalid)">
-    
-                <div class="input-error" *ngIf="(signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)) || showErrors">
-                    <div *ngIf="signupForm.get('email')?.hasError('required')">This field is required.</div>
-                    <div *ngIf="signupForm.get('email')?.hasError('email')">email is not valid</div>
+            <div class="page" [class.hidden] = "!inStepStudent">
+                <div class="input-block-sm">
+                    <div class="book-icon"></div>
+                    <select #inputElement name="fieldOfStudy" id="fieldOfStudy" class="fieldOfStudy"
+                    required>
+                        <option value="" disabled selected hidden>Field of study</option>
+                        <option *ngFor="let field of fieldList" [value]="field">{{field}}</option>
+                    </select>
                 </div>
-            </div>
+                
+                <div class="input-block-sm">
+                    <div class="account-icon"></div>
+                    <input #inputElement type="number" name="educationLevel" id="educationLevel" class="educationLevel"
+                      formControlName="educationLevel"
+                      [placeholder]="'Study level'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('educationLevel')?.invalid && (signupForm.get('educationLevel')?.dirty || signupForm.get('educationLevel')?.touched)) || showErrorsStepStudent">
+                        <div *ngIf="signupForm.get('educationLevel')?.hasError('min') || signupForm.get('educationLevel')?.hasError('max')">education level is not logical!!</div>
+                    </div>
+                </div>
     
-            <div class="input-block">
-                <div class="key-icon"></div>
-                <input type="password" name="password" id="password" class="password"
-                 formControlName="password"
-                 [placeholder]="'password'"
-                    (input)="globalFunctions.detectErrors($event.target, signupForm.get('password')?.invalid)"
-                    (click)="globalFunctions.commitErrors($event.target, signupForm.get('password')?.invalid)"
-                    (change)="globalFunctions.commitErrors($event.target, signupForm.get('password')?.invalid)">
+                <div class="input-block">
+                    <div class="teacher-icon"></div>
+                    <select #inputElement name="university" id="university" class="university"
+                    required>
+                        <option value="" disabled selected hidden>University</option>
+                        <option *ngFor="let uni of uniList" [value]="uni">{{uni}}</option>
+                    </select>
+                </div>
     
-                <div class="input-error" *ngIf="(signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)) || showErrors">
-                    <div *ngIf="signupForm.get('password')?.hasError('required')">This field is required.</div>
-                    <div *ngIf="signupForm.get('password')?.hasError('minlength')">Password must be at least 8 characters long.</div>
+                <div class="input-block">
+                    <div class="to-do-icon"></div>
+                    <div class="import-icon"></div>
+                    <label for="cv">
+                        <p class="placeholder">{{ CVname || 'CV' }}</p>
+                    </label>
+                    <input #inputElement type="file" name="cv" id="cv" class="cv"
+                      formControlName="cv"
+                      [placeholder]="'cv'"
+                    (change)="handleFileChange($event)">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('cv')?.invalid && (signupForm.get('cv')?.dirty || signupForm.get('cv')?.touched)) || showErrorsStepStudent">
+                    </div>
+                </div>
+
+                <div class="inputs-list-holder skills">
+                    <div class="inputs-list-button" (click)="toggleSkillsInputsVisiblity()">
+                        <div class="star-icon"></div>
+                        <div class="add-icon" [class.hidden]="isSkillsInputsVisible"></div>
+                        <div class="subtract-icon" [class.hidden]="!isSkillsInputsVisible"></div>
+                        <div class="placeholder">Skills</div>
+                    </div>
+
+                    <div class="entries-list" [class.hidden]="skillsList.length === 0">
+                    </div>
+
+                    <div class="input-list" [class.hidden]="!isSkillsInputsVisible">
+                        <div class="input-block">
+                            <div class="star-icon"></div>
+                            <input #inputElement type="text" name="website" id="website" class="website"
+                            formControlName="skillName"
+                            [placeholder]="'Skill name'">
+                        </div>
+
+                        <div class="input-block">
+                            <div class="slim-pen-icon"></div>
+                            <input #inputElement type="text" name="discription" id="discription" class="discription"
+                            formControlName="discription"
+                            [placeholder]="'Discription'">
+                        </div>
+                        <button class="save-btn" (click)="globalFunctions.rippleEffect($event); globalFunctions.scaleEffect($event); saveSkill();">Save</button>
+                    </div>
+                </div>
+
+                <div class="inputs-list-holder experiences">
+                    <div class="inputs-list-button" (click)="toggleExperienceInputsVisiblity()">
+                        <div class="work-bag-icon"></div>
+                        <div class="add-icon" [class.hidden]="isExperienceInputsVisible"></div>
+                        <div class="subtract-icon" [class.hidden]="!isExperienceInputsVisible"></div>
+                        <div class="placeholder">Experience</div>
+                    </div>
+
+                    <div class="entries-list" [class.hidden]="experiencesList.length === 0">
+                    </div>
+
+                    <div class="input-list" [class.hidden]="!isExperienceInputsVisible">
+                        <div class="input-block">
+                            <div class="work-bag-icon"></div>
+                            <input #inputElement type="text" name="title" id="title" class="title"
+                            formControlName="title"
+                            [placeholder]="'Job title'">
+                        </div>
+
+                        <div class="input-block">
+                            <div class="workers-icon"></div>
+                            <input #inputElement type="text" name="position" id="position" class="position"
+                            formControlName="position"
+                            [placeholder]="'Position'">
+                        </div>
+
+                        <div class="input-block">
+                            <div class="building-icon"></div>
+                            <input #inputElement type="text" name="establishment-name" id="establishment-name" class="establishment-name"
+                            formControlName="establishmentName"
+                            [placeholder]="'Establishment name'">
+                        </div>
+
+                        <div class="input-block">
+                            <div class="clock-icon"></div>
+                            <input #inputElement type="text" name="time" id="time" class="time"
+                            formControlName="timePeriod"
+                            [placeholder]="'Time period'">
+                        </div>
+                        <button class="save-btn" (click)="globalFunctions.rippleEffect($event); globalFunctions.scaleEffect($event); saveExperience();">Save</button>
+                    </div>
+                </div>
+
+    
+                <div class="input-block">
+                    <div class="linkedin-icon"></div>
+                    <input #inputElement type="text" name="linkedin" id="linkedin" class="linkedin"
+                      formControlName="linkedin"
+                      [placeholder]="'linkedin'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('linkedin')?.invalid && (signupForm.get('linkedin')?.dirty || signupForm.get('linkedin')?.touched)) || showErrorsStepStudent">
+                    </div>
                 </div>
             </div>
 
-            <div class="input-block">
-                <div class="key-icon"></div>
-                <input type="password" name="cpassword" id="cpassword" class="cpassword"
-                 formControlName="cpassword"
-                 [placeholder]="'confirm password'"
-                    (input)="globalFunctions.detectErrors($event.target, signupForm.get('cpassword')?.invalid || !isPasswordMatch())"
-                    (click)="globalFunctions.commitErrors($event.target, signupForm.get('cpassword')?.invalid || !isPasswordMatch())"
-                    (change)="globalFunctions.commitErrors($event.target, signupForm.get('cpassword')?.invalid || !isPasswordMatch())">
-    
-                <div class="input-error" *ngIf="((signupForm.get('cpassword')?.invalid || !isPasswordMatch()) && (signupForm.get('cpassword')?.dirty || signupForm.get('cpassword')?.touched)) || showErrors">
-                    <div *ngIf="signupForm.get('cpassword')?.hasError('required')">This field is required.</div>
-                    <div *ngIf="signupForm.get('cpassword')?.hasError('minlength')">Password confirmation must be at least 8 characters long.</div>
-                    <div *ngIf="!isPasswordMatch()">confirmation doesn't correspond to the password</div>
+            <div class="page" [class.hidden] = "!inStepCompany">
+                <div class="input-block">
+                    <div class="building-icon"></div>
+                    <input #inputElement type="text" name="company-name" id="company-name" class="company-name"
+                      formControlName="companyName"
+                      [placeholder]="'Company name'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('companyName')?.invalid && (signupForm.get('companyName')?.dirty || signupForm.get('companyName')?.touched)) || showErrorsStepCompany">
+                    </div>
+                </div>
+
+                <div class="input-block">
+                    <div class="email-icon"></div>
+                    <input #inputElement type="text" name="company-email" id="company-email" class="company-email"
+                      formControlName="companyEmail"
+                      [placeholder]="'Company email'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('companyEmail')?.invalid && (signupForm.get('companyEmail')?.dirty || signupForm.get('companyEmail')?.touched)) || showErrorsStepCompany">
+                        <div *ngIf="signupForm.get('companyEmail')?.hasError('email')">email is not valid</div>
+                    </div>
+                </div>
+
+                <div class="inputs-list-holder links">
+                    <div class="inputs-list-button" (click)="toggleEstablishmentLinksInputsVisiblity()">
+                        <div class="social-media-icon"></div>
+                        <div class="add-icon" [class.hidden]="isEstablishmentLinksInputsVisible"></div>
+                        <div class="subtract-icon" [class.hidden]="!isEstablishmentLinksInputsVisible"></div>
+                        <div class="placeholder">Establishment Links</div>
+                    </div>
+
+                    <div class="entries-list" [class.hidden]="linksList.length === 0">
+                    </div>
+
+                    <div class="input-list" [class.hidden]="!isEstablishmentLinksInputsVisible">
+                        <div class="input-block">
+                            <div class="website-icon"></div>
+                            <input #inputElement type="text" name="website" id="website" class="website"
+                            formControlName="name"
+                            [placeholder]="'Website name'">
+                        </div>
+
+                        <div class="input-block">
+                            <div class="url-icon"></div>
+                            <input #inputElement type="text" name="url" id="url" class="url"
+                            formControlName="link"
+                            [placeholder]="'Website link'">
+                        </div>
+                        <button class="save-btn" (click)="globalFunctions.rippleEffect($event); globalFunctions.scaleEffect($event); saveLink();">Save</button>
+                    </div>
+                </div>
+
+                <div class="input-block">
+                    <div class="location-icon"></div>
+                    <input #inputElement type="text" name="location" id="location" class="location"
+                      formControlName="location"
+                      [placeholder]="'Location'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('location')?.invalid && (signupForm.get('location')?.dirty || signupForm.get('location')?.touched)) || showErrorsStepCompany">
+                    </div>
+                </div>
+
+                <div class="input-block">
+                    <div class="phone-icon"></div>
+                    <input #inputElement type="text" name="company-phone" id="company-phone" class="company-phone"
+                      formControlName="companyPhone"
+                      [placeholder]="'Phone number'">
+        
+                    <div class="input-error" *ngIf="(signupForm.get('companyPhone')?.invalid && (signupForm.get('companyPhone')?.dirty || signupForm.get('companyPhone')?.touched)) || showErrorsStepCompany">
+                        <div *ngIf="signupForm.get('companyPhone')?.hasError('pattern')">phone is not valid</div>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="form-buttons">
+            <button class="back-btn" (click)="globalFunctions.rippleEffect($event); globalFunctions.scaleEffect($event); handleStepTransitionDown();" [class.hidden]="inStepOne">Back</button>
+            <button class="login-btn" (click)="globalFunctions.rippleEffect($event); globalFunctions.scaleEffect($event); handleStepTransitionUp();" type="submit">
+                {{ inStepStudent === true || inStepCompany === true? 'Sign up' : 'Continue' }}
+            </button>
+            
         </div>
         
-        <div class="form-buttons">
-            <button class="login-btn" (click)="globalFunctions.rippleEffect($event)" type="submit">Sign up</button>
-        </div>
     </form>
     <div class="other-options">
         <div class="no-accounts">

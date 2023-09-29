@@ -31,4 +31,13 @@ export class GlobalFunctionsService {
       ripples.remove()
     }, 500)
   }
+
+  scaleEffect(event: any){
+    console.log('scale work')
+    event.target.classList.add('clicked')
+
+    setTimeout(() => {
+      event.target.classList.remove('clicked')
+    }, 500)
+  }
 }

@@ -1,0 +1,92 @@
+<div class="small-circle"></div>
+<div class="big-circle"></div>
+<div class="auth-picture"></div>
+
+<div class="user-form-hanger">
+    <div class="header">
+        <div class="form-title">WELCOME</div>
+        <div class="form-title-explanation">create a new account</div>
+    </div>
+
+    <form [formGroup]="studentInfo" class="form-group">
+        <div class="form-inputs">
+            <div class="input-block-sm">
+                <div class="book-icon"></div>
+                <select #inputElement name="fieldOfStudy" id="fieldOfStudy" class="fieldOfStudy"
+                 (input)="globalFunctions.detectErrors($event, studentInfo.get('fieldOfStudy')?.invalid)"
+                 (click)="globalFunctions.commitErrors($event, studentInfo.get('fieldOfStudy')?.invalid)"
+                 (change)="globalFunctions.commitErrors($event, studentInfo.get('fieldOfStudy')?.invalid)" 
+                required>
+                    <option value="" disabled selected hidden>Field of study</option>
+                    <option *ngFor="let field of fieldList" [value]="field">{{field}}</option>
+                </select>
+            </div>
+            
+            <div class="input-block-sm">
+                <div class="account-icon"></div>
+                <input #inputElement type="number" name="educationLevel" id="educationLevel" class="educationLevel"
+                  formControlName="educationLevel"
+                  [placeholder]="'Study level'"
+                 (input)="globalFunctions.detectErrors($event.target, studentInfo.get('educationLevel')?.invalid)"
+                 (click)="globalFunctions.commitErrors($event.target, studentInfo.get('educationLevel')?.invalid)"
+                (change)="globalFunctions.commitErrors($event.target, studentInfo.get('educationLevel')?.invalid)">
+    
+                <div class="input-error" *ngIf="(studentInfo.get('educationLevel')?.invalid && (studentInfo.get('educationLevel')?.dirty || studentInfo.get('educationLevel')?.touched)) || showErrors">
+                    <div *ngIf="studentInfo.get('educationLevel')?.hasError('min') || studentInfo.get('educationLevel')?.hasError('max')">education level is not logical!!</div>
+                </div>
+            </div>
+
+            <div class="input-block">
+                <div class="teacher-icon"></div>
+                <select #inputElement name="university" id="university" class="university"
+                 (input)="globalFunctions.detectErrors($event, studentInfo.get('university')?.invalid)"
+                 (click)="globalFunctions.commitErrors($event, studentInfo.get('university')?.invalid)"
+                 (change)="globalFunctions.commitErrors($event, studentInfo.get('university')?.invalid)" 
+                required>
+                    <option value="" disabled selected hidden>University</option>
+                    <option *ngFor="let uni of uniList" [value]="uni">{{uni}}</option>
+                </select>
+            </div>
+
+            <div class="input-block">
+                <div class="to-do-icon"></div>
+                <div class="import-icon"></div>
+                <label for="cv">
+                    <p class="placeholder">{{ CVname || 'CV' }}</p>
+                </label>
+                <input #inputElement type="file" name="cv" id="cv" class="cv"
+                  formControlName="cv"
+                  [placeholder]="'cv'"
+                 (input)="globalFunctions.detectErrors($event.target, studentInfo.get('cv')?.invalid)"
+                 (click)="globalFunctions.commitErrors($event.target, studentInfo.get('cv')?.invalid)"
+                (change)="globalFunctions.commitErrors($event.target, studentInfo.get('cv')?.invalid); handleFileChange($event)">
+    
+                <div class="input-error" *ngIf="(studentInfo.get('cv')?.invalid && (studentInfo.get('cv')?.dirty || studentInfo.get('cv')?.touched)) || showErrors">
+                </div>
+            </div>
+
+            <div class="input-block">
+                <div class="linkedin-icon"></div>
+                <input #inputElement type="text" name="linkedin" id="linkedin" class="linkedin"
+                  formControlName="linkedin"
+                  [placeholder]="'linkedin'"
+                 (input)="globalFunctions.detectErrors($event.target, studentInfo.get('linkedin')?.invalid)"
+                 (click)="globalFunctions.commitErrors($event.target, studentInfo.get('linkedin')?.invalid)"
+                (change)="globalFunctions.commitErrors($event.target, studentInfo.get('linkedin')?.invalid)">
+    
+                <div class="input-error" *ngIf="(studentInfo.get('linkedin')?.invalid && (studentInfo.get('linkedin')?.dirty || studentInfo.get('linkedin')?.touched)) || showErrors">
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-buttons">
+            <button class="login-btn" (click)="globalFunctions.rippleEffect($event)" type="submit">Sign up</button>
+        </div>
+    
+    </form>
+    <div class="other-options">
+        <div class="no-accounts">
+            <div class="no-accounts-text">You already have an account?<a [routerLink]="'/login'">log in</a></div>
+        </div>
+    </div>
+</div>
