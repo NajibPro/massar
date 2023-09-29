@@ -1,0 +1,11 @@
+.input-block-sm{
+    position: relative;
+    width: calc(50% - 12px);
+    flex-direction: column;
+    gap: 10px;
+    overflow: visible;
+}
+
+.input-block-sm input{
+    padding-left: 60px;
+}

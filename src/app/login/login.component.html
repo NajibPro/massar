@@ -1,6 +1,7 @@
 <div class="small-circle"></div>
 <div class="big-circle"></div>
 <div class="auth-picture"></div>
+<div class="auth-picture-fixed"></div>
 
 <div class="user-form-hanger">
     <div class="header">
@@ -42,7 +43,7 @@
         </div>
         
         <div class="form-buttons">
-            <button class="login-btn" (click)="globalFunctions.rippleEffect($event)" type="submit">Log in</button>
+            <button class="login-btn" (click)="globalFunctions.rippleEffect($event); globalFunctions.scaleEffect($event)" type="submit">Log in</button>
         </div>
     </form>
     <div class="other-options">
