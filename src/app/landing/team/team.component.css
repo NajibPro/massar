@@ -54,8 +54,6 @@ h3 a {
 }
 
 :root {
-    --blue: #4A3594;
-    --yellow: #f7de3a;
     --huge-text-dynamic: 8vw;
     --huge-text-static: 62px;
     --big-text-dynamic: 5vw;
