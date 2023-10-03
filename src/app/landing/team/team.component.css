@@ -1,0 +1,38 @@
+.title-line{
+    width: 100px;
+    left: 49%;
+}
+
+.team-member{
+    position: relative;
+}
+
+.member-image{
+    min-width: 180px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-image: url('../../../assets/imgs/profilepic.svg');
+}
+
+.team-list{
+    width: 100%;
+    padding-inline: 44px;
+    gap: 23px;
+    justify-content: space-around;
+    overflow: scroll;
+}
+
+.team-list::-webkit-scrollbar {
+    width: 0; /* Adjust as needed */
+    background-color: white; /* Adjust to match your background color */
+}
+
+.team-list::-webkit-scrollbar-thumb {
+    background-color: white; /* Adjust to your preferred scrollbar color */
+}
+
+.member-name,
+.member-role{
+    position: absolute;
+    visibility: hidden;
+}

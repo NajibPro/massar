@@ -1,1 +1,17 @@
-<div class="nav-logo"></div>
+<div class="massar-logo" [ngStyle]="{'margin-right': isNavComponentsVisible? 0 : 'auto'}"></div>
+<div class="nav-writings" [class.hidden]="!isNavComponentsVisible">
+    <button class="signup-btn nav-btn" [routerLink]="'/signup'" (click)="gf.scaleEffect($event)">Join us</button>
+    <div class="page" [class.colored]="navElementsList[0]" (click)="animateNav(0)">Home</div>
+    <div class="page" [class.colored]="navElementsList[1]" (click)="animateNav(1)">About us</div>
+    <div class="page" [class.colored]="navElementsList[2]" (click)="animateNav(2)">Contact us</div>
+    <div class="page" [class.colored]="navElementsList[3]" (click)="animateNav(3)">FAQ</div>
+    <div class="page" [class.colored]="navElementsList[4]" (click)="animateNav(4)">Community</div>
+</div>
+
+<div class="action-buttons" [class.hidden]="!isNavComponentsVisible">
+    <button class="login-btn nav-btn" [routerLink]="'/login'" (click)="gf.scaleEffect($event)">Login</button>
+    <button class="signup-btn nav-btn" [routerLink]="'/signup'" (click)="gf.scaleEffect($event)">Join us</button>
+</div>
+
+<div class="hamburger" (click)="showNavBar()" [class.hidden]="!isHamburgerVisible || !isNavComponentsVisible"></div>
+<div class="xmark" (click)="hideNavBar()" [class.hidden]="isHamburgerVisible || !isNavComponentsVisible"></div>
