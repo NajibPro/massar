@@ -268,6 +268,7 @@
                     <div class="phone-icon"></div>
                     <input #inputElement type="text" name="company-phone" id="company-phone" class="company-phone"
                       formControlName="companyPhone"
+                      [pattern]="'\+213\d{9}'"
                       [placeholder]="'Phone number'">
         
                     <div class="input-error" *ngIf="(signupForm.get('companyPhone')?.invalid && (signupForm.get('companyPhone')?.dirty || signupForm.get('companyPhone')?.touched)) || showErrorsStepCompany">
