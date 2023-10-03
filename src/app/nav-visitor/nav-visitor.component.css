@@ -5,3 +5,128 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.massar-logo{
+    min-width: 60px;
+    height: 52px;
+    background-image: url('../../assets/imgs/massarnavlogo.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nav-writings{
+    justify-content: center;
+    gap: 60px;
+    font-size: 18px;
+    font-weight: bolder;
+    margin-inline: auto;
+}
+
+.nav-writings .nav-btn{
+    margin-bottom: 20px;
+    margin-inline: 20px;
+}
+
+.page{
+    position: relative;
+    cursor: pointer;
+    top: 0;
+    transition: top 0.1s ease-in;
+}
+
+.colored{
+    color: var(--primary-color);
+}
+
+.page:hover{
+    top: -7px;
+}
+
+.action-buttons{
+    gap: 10px;
+}
+
+.nav-btn{
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--primary-color);
+    padding: 0.3em 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn:hover{
+    background-color:rgba(31, 142, 64, 1);
+}
+
+.nav-writings .nav-btn{
+    display: none;
+}
+
+.hamburger,
+.xmark{
+    width: 52px;
+    height: 52px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger{
+    background-image: url('../../assets/imgs/hamburger.svg');
+}
+
+.xmark{
+    background-image: url('../../assets/imgs/x.svg');
+}
+
+@media screen and (max-width: 960px){
+    .nav-writings{
+        position: absolute;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0;
+        padding-inline: 20px;
+        left: 100%;
+        top: 70px;
+        height: calc(100vh - 70px);
+        width: 272px;
+        background-color: white;
+        z-index: 5;
+        -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+        padding-top: 20px;
+        transition: left 0.5s ease;
+    }
+
+    .visible-nav{
+        left: calc(100% - 272px);
+    }
+
+    .page{
+        padding-bottom: 30px;
+    }
+
+    .action-buttons{
+        display: none;
+    }
+
+    .hamburger,
+    .xmark{
+        display: flex;
+        margin-left: auto;
+    }
+
+    .nav-writings .nav-btn{
+        display: block;
+    }
+}
+
+.hidden{
+    display: none;
+}

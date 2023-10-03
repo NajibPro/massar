@@ -23,6 +23,13 @@ form{
 
 html{
     overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body{
+    position: relative;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 button{
@@ -30,6 +37,29 @@ button{
     overflow: hidden;
     border: none;
     cursor: pointer;
+}
+
+.clicked {
+    transform: scale(0.95);
+}
+
+app-nav-visitor{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    padding-inline: 20px;
+    z-index: 5;
+    transition: background-color 0.3s linear;
+}
+
+.relative-nav{
+    display: none;
 }
 
 app-login,
@@ -47,6 +77,75 @@ app-user-info{
 
 app-root{
     max-width: 100%;
+}
+
+app-hero-section{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    width: 100%;
+    height: min(725px, 100vh);
+    padding: 71px 50px 50px 50px;
+
+}
+
+app-why-massar{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 74px;
+}
+
+app-building-careers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 74px;
+    padding-bottom: 74px;
+}
+
+app-team{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 74px;
+    padding-bottom: 74px;
+}
+
+@media screen and (max-width: 1150px){
+    app-hero-section{
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 960px){
+    app-hero-section{
+        height: min(600px, 100vh);
+        min-height: 600px;
+    }
+
+    app-nav-visitor{
+        background-color: white;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+    }
+
+    .relative-nav{
+        display: block;
+        position: relative;
+        visibility: hidden;
+    }
+}
+
+@media screen and (max-width: 520px){
+    app-hero-section{
+        padding-left: 10px;
+        padding-right: 10px;
+        height: calc(100vh - 70px);
+    }
 }
 
 span{
@@ -71,15 +170,213 @@ span{
     display: none;
 }
 
-app-nav-visitor{
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 18px 26px;
-    width: 100%;
-    height: 100px;
+.email-icon,
+.key-icon,
+.account-icon,
+.eye-icon,
+.meta,
+.google,
+.book-icon,
+.graduation-icon,
+.teacher-icon,
+.pen-icon,
+.bag-icon,
+.to-do-icon,
+.linkedin-icon,
+.experience-icon,
+.import-icon,
+.website-icon,
+.url-icon,
+.social-media-icon,
+.building-icon,
+.add-icon,
+.subtract-icon,
+.location-icon,
+.phone-icon,
+.workers-icon,
+.clock-icon,
+.work-bag-icon,
+.star-icon,
+.slim-pen-icon{
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
+.email-icon,
+.key-icon,
+.account-icon,
+.eye-icon,
+.book-icon,
+.graduation-icon,
+.teacher-icon,
+.pen-icon,
+.bag-icon,
+.to-do-icon,
+.linkedin-icon,
+.website-icon,
+.url-icon,
+.social-media-icon,
+.building-icon,
+.location-icon,
+.phone-icon,
+.workers-icon,
+.clock-icon,
+.work-bag-icon,
+.star-icon,
+.slim-pen-icon{
+    position: absolute;
+    top: 12px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.import-icon,
+.experience-icon,
+.add-icon,
+.subtract-icon{
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+}
+
+.accounts{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.meta,
+.google{
+    position: relative;
+    overflow: hidden;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.x-mark{
+    cursor: pointer;
+    min-width: 17px;
+    height: 17px;
+    background-image: url('assets/imgs/xgray.svg');
+}
+
+.email-icon{
+    background-image: url('assets/imgs/envlope.svg');
+}
+
+.key-icon{
+    background-image: url('assets/imgs/key.svg');
+}
+
+.account-icon{
+    background-image: url('assets/imgs/person.svg');
+}
+
+.eye-icon{
+    background-image: url('assets/imgs/no-eye.svg');
+}
+
+.google{
+    background-image: url('assets/imgs/Google.svg');
+}
+
+.meta{
+    background-image: url('assets/imgs/meta.svg');
+}
+
+.book-icon{
+    background-image: url('assets/imgs/book.svg');
+}
+
+.graduation-icon{
+    background-image: url('assets/imgs/graduation.svg');
+}
+
+.teacher-icon{
+    background-image: url('assets/imgs/teacher.svg');
+}
+
+.pen-icon{
+    background-image: url('assets/imgs/pen.svg');
+}
+
+.bag-icon{
+    background-image: url('assets/imgs/bag.svg');
+}
+
+.to-do-icon{
+    background-image: url('assets/imgs/todolist.svg');
+}
+
+.linkedin-icon{
+    background-image: url('assets/imgs/linkedin.svg');
+}
+
+.experience-icon{
+    background-image: url('assets/imgs/add.svg');
+}
+
+.import-icon{
+    background-image: url('assets/imgs/import.svg');
+}
+
+.website-icon{
+    background-image: url('assets/imgs/website.svg');
+}
+
+.url-icon{
+    background-image: url('assets/imgs/link.svg');
+}
+
+.social-media-icon{
+    background-image: url('assets/imgs/links.svg');
+}
+
+.building-icon{
+    background-image: url('assets/imgs/building.svg');
+}
+
+.add-icon{
+    background-image: url('assets/imgs/add.svg');
+}
+
+.subtract-icon{
+    background-image: url('assets/imgs/subtract.svg');
+}
+
+.location-icon{
+    background-image: url('assets/imgs/location.svg');
+}
+
+.phone-icon{
+    background-image: url('assets/imgs/phone.svg');
+}
+
+.workers-icon{
+    background-image: url('assets/imgs/workers.svg');
+}
+
+.clock-icon{
+    background-image: url('assets/imgs/clock.svg');
+}
+
+.work-bag-icon{
+    background-image: url('assets/imgs/workBag.svg');
+}
+
+.star-icon{
+    background-image: url('assets/imgs/star.svg');
+}
+
+.slim-pen-icon{
+    background-image: url('assets/imgs/penslim.svg');
 }
 
 @keyframes animate{

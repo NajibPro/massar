@@ -1,0 +1,96 @@
+footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    background-color: #4A3594;
+    padding: 47px 30px;
+    gap: 7vw;
+    row-gap: 50px;
+}
+
+.sub-section{
+    width: 150px;
+    min-width: fit-content;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.massar-logo{
+    width: 57px;
+    height: 70px;
+    background-image: url('../../assets/imgs/Massar-footer.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.insperational-text{
+    max-width: 200px;
+    color: #A3A3A3;
+}
+
+.title{
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.pages-list{
+    flex-direction: column;
+    color: white;
+    gap: 28px;
+}
+
+.icons{
+    gap: 15px;
+}
+
+.footer-icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.contact{
+    gap: 8px;
+}
+
+.contact-text{
+    color: white;
+}
+
+.contact-logo{
+    min-width: 24px;
+    height: 24px;
+    background-image: url('../../assets/imgs/email.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.insta{
+    background-image: url('../../assets/imgs/instagram.svg');
+}
+
+.tiktok{
+    background-image: url('../../assets/imgs/tiktok.svg');
+}
+
+.linkedin{
+    background-image: url('../../assets/imgs/LinkedInsmall.svg');
+}
+
+@media screen and (max-width: 920px){
+    footer{
+        justify-content: flex-start;
+    }
+}
+
+@media screen and (max-width: 600px){
+    footer{
+        gap: 120px;
+    }
+}
