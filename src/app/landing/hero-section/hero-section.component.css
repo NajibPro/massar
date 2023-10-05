@@ -5,6 +5,7 @@
     z-index: -1;
     width: 100%;
     height: min(725px, 100vh);
+    min-height: 500px;
     background-image: url('../../../assets/imgs/colorful-backgrounf.svg');
     background-position: center;
     background-repeat: no-repeat;
@@ -91,7 +92,7 @@
     position: absolute;
     width: 50px;
     height: 50px;
-    bottom: 100px;
+    top: 78dvh/*100px*/;
     animation: floatAnimation 2s infinite;
     background-image: url('../../../assets/imgs/down.svg');
     background-repeat: no-repeat;
@@ -142,11 +143,17 @@
     }
 }
 
-@media screen and (max-width: 420px){
+@media screen and (max-width: 430px){
     .hero-title{
         font-size: clamp(42px, 14.71vw, 60px);
     }
     .hero-explanation{
         font-size: 20px;
+    }
+}
+
+@media screen and (max-height: 675px){
+    .productivity-image{
+        top: 47px;
     }
 }

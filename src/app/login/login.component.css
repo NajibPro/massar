@@ -30,15 +30,16 @@
 
 .auth-picture-fixed,
 .auth-picture{
-    width: 45.36%;
+    height: min(90%, 42vw);
     min-width: 500px;
+    min-height: 478px;
     max-width: 762px;
     aspect-ratio: 116/107;
     background-image: url('../../assets/imgs/auth-main-pic.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    top: 8%;
+    bottom: 6vh;
 }
 
 .auth-picture-fixed{
@@ -296,7 +297,7 @@ input::placeholder,
     background-color: white;
     color: #757171;
     font-size: 12px;
-    padding: 15px;
+    padding-inline: 15px;
 }
 
 .no-accounts{
@@ -326,6 +327,37 @@ a{
     }
 }
 
+@media screen and (min-height: 600px){
+    .auth-picture-fixed,
+.auth-picture{
+    bottom: 12vh/*8vh*/;
+}
+}
+
+@media screen and (min-height: 600px) and (max-width: 1280px){
+    .auth-picture-fixed,
+.auth-picture{
+    bottom: 8vh;
+}
+}
+
+@media screen and (min-height: 700px) and (max-width: 1280px){
+    .auth-picture-fixed,
+    .auth-picture{
+        bottom: 22%;
+
+    }
+}
+
+@media screen and (max-height: 618px){
+    .user-form-hanger{
+        gap: 22px;
+    }
+
+    .form-group{
+        gap: 25px;
+    }
+}
 .no-padding{
     padding: 0;
 }
